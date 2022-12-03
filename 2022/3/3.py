@@ -1,7 +1,6 @@
+import string
 
 data = open('data.txt', 'r').read()
-
-import string
 
 def getItemPriority(letter):
     return string.ascii_letters.index(letter) + 1
