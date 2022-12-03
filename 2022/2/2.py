@@ -34,7 +34,7 @@ part2MoveMap = {
   "C Z" : "X",
 }
 
-data = open('C://Users/PandaMan/Desktop/advent/2/data.txt', 'r').read()
+data = open('data.txt', 'r').read()
 
 def part1():
     rounds = data.split('\n')
