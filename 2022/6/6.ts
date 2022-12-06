@@ -9,7 +9,7 @@ function anyDuplicates(arr: string[]) {
 
 function part1() {
     const chars = input.split('')
-    const current4Characters: string[] = [chars[0], chars[1], chars[2], chars[3]]
+    const current4Characters: string[] = chars.slice(0, 4)
     
     if (!anyDuplicates(current4Characters)) {
         return 4 // no duplicates in first 4 so just return 4
@@ -32,10 +32,7 @@ function part1() {
 function part2() {
     const chars = input.split('')
     const numberOfCharactersUntilMessage = 14
-    const currentXCharacters: string[] = []
-    for(let i = 0; i < numberOfCharactersUntilMessage; i++) {
-        currentXCharacters.push(chars[i])
-    }
+    const currentXCharacters = chars.slice(0, numberOfCharactersUntilMessage)
     
     if (!anyDuplicates(currentXCharacters)) {
         return numberOfCharactersUntilMessage
