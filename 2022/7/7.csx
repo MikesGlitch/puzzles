@@ -1,28 +1,8 @@
-using System.Text.Json;
-
-var lines = File.ReadAllLines("./data.txt");
-
-public abstract class Node {
-    public Node (string name, DirectoryNode parent)
-    {
-        Name = name;
-        Parent = parent;
-    }
-
-    public string Name { get; set; }
-
-    public DirectoryNode Parent { get; set; }
-
-    public abstract int GetTotalSizeBytes();
+public abstract record Node(string Name, DirectoryNode Parent) {
+        public abstract int GetTotalSizeBytes();
 }
 
-public class DirectoryNode: Node {
-    public DirectoryNode(string name, DirectoryNode parent) : base(name, parent)
-    {
-    }
-
-    public List<Node> Nodes { get; set; } = new List<Node>();
-
+public record DirectoryNode(string Name, DirectoryNode Parent, List<Node> Nodes): Node(Name, Parent) {
     public override int GetTotalSizeBytes() {
         var totalBytes = 0;
 
@@ -34,13 +14,7 @@ public class DirectoryNode: Node {
     }
 }
 
-public class FileNode: Node {
-    public FileNode (string name, int sizeBytes, DirectoryNode parent) : base(name, parent)
-    {
-        SizeBytes = sizeBytes;
-    }
-
-    public int SizeBytes { get; set; }
+public record FileNode(string Name, DirectoryNode Parent, int SizeBytes): Node(Name, Parent) {
 
     public override int GetTotalSizeBytes() => SizeBytes;
 }
@@ -50,10 +24,10 @@ private Boolean IsCommand(string line) => line.StartsWith("$");
 private Node GetNodeListing(string line, DirectoryNode currentDirectory) {
     if (line.StartsWith("dir")) {
         var directoryName = line.Split(" ")[1];
-        return new DirectoryNode(directoryName, currentDirectory);
+        return new DirectoryNode(directoryName, currentDirectory, new List<Node>());
     } else if (int.TryParse(line.Split(" ")[0], out var numberOfBytes)) {
         var fileName = line.Split(" ")[1];
-        return new FileNode(fileName, numberOfBytes, currentDirectory);
+        return new FileNode(fileName, currentDirectory, numberOfBytes);
     }
 
     throw new Exception($"Unknown input in line: ${line}");
@@ -91,7 +65,8 @@ public List<int> GetSizeOfSmallestDirectoriesOverSizeX(int x, DirectoryNode dire
 }
 
 private DirectoryNode SetupNodes() {    
-    var rootNode = new DirectoryNode("/", null); // file system needs at least a root node
+    var lines = File.ReadAllLines("./data.txt");
+    var rootNode = new DirectoryNode("/", null, new List<Node>()); // file system needs at least a root node
     DirectoryNode currentNode = null;
 
     foreach (var line in lines) {
