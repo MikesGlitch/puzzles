@@ -1,3 +1,3 @@
-# Advent of Code
+# Advent of Code puzzles
 
 [https://adventofcode.com/](https://adventofcode.com/)
