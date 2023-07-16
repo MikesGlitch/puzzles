@@ -2,6 +2,7 @@ namespace algorithms;
 
 public class BubbleSort
 {
+    // Time Complexity: O(n^2)
     [Theory]
     [InlineData(new int[] { 8, 3, 5, 6, 1, 4, 3 }, new int[] {1, 3, 3, 4, 5, 6, 8 } )]
     public void Sort(int[] data, int[] expected)
