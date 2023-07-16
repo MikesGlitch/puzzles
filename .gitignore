@@ -10,3 +10,6 @@
 *.njsproj
 *.sln
 *.sw?
+
+bin
+obj
