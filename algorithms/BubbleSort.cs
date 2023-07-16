@@ -8,7 +8,7 @@ public class BubbleSort
     public void Sort(int[] data, int[] expected)
     {
         for (var i = 0; i < data.Length; i++) {
-            for (var j = 0; j < data.Length -1 - i; j++) {
+            for (var j = 0; j < data.Length - 1 - i; j++) {
                 if (data[j] > data[j + 1]) {
                     (data[j + 1], data[j]) = (data[j], data[j + 1]);
                 }
