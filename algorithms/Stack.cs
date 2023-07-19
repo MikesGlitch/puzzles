@@ -58,20 +58,20 @@ public class Stack
         var peekResult = stack.Peek();
         Assert.Equal("4", peekResult);
 
-        var dequeue1Result = stack.Pop();
-        Assert.Equal("4", dequeue1Result);
+        var pop1Result = stack.Pop();
+        Assert.Equal("4", pop1Result);
         Assert.Equal(3, stack.Length);
 
-        var dequeue2Result = stack.Pop();
-        Assert.Equal("3", dequeue2Result);
+        var pop2Result = stack.Pop();
+        Assert.Equal("3", pop2Result);
         Assert.Equal(2, stack.Length);
 
-        var dequeue3Result = stack.Pop();
-        Assert.Equal("2", dequeue3Result);
+        var pop3Result = stack.Pop();
+        Assert.Equal("2", pop3Result);
         Assert.Equal(1, stack.Length);
 
-        var dequeue4Result = stack.Pop();
-        Assert.Equal("1", dequeue4Result);
+        var pop4Result = stack.Pop();
+        Assert.Equal("1", pop4Result);
         Assert.Equal(0, stack.Length);
     }
 }
